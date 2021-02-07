@@ -1,10 +1,8 @@
 package com.example.SpringAss3APJ2.controller;
 
-import com.example.SpringAss3APJ2.UserService;
+import com.example.SpringAss3APJ2.repo.UserService;
 import com.example.SpringAss3APJ2.model.User;
-import com.example.SpringAss3APJ2.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +31,7 @@ public class UserController
     {
         return "index";
     }
-    @GetMapping("/arrivals")
-    public String arrivals()
-    {
-        return "arrivals";
-    }
+
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable("id") Long id, Model model)
     {

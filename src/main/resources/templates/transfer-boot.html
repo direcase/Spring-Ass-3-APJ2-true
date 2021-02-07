@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>BSB Transfers</title>
@@ -16,12 +16,12 @@
                     <h3 class="bg-gray p-4">Transfer money to card of another bank</h3>
                     <p class="bg-gray p-4">cut 1% from the transfer amount</p>
 
-                    <form action="/anotherBank" method="post">
+                    <form method="post" th:action="@{/transfers-boot/}">
                         <fieldset class="p-4">
 
                             <input type="number" name="cardN1" placeholder="Your card number" class="border p-3 w-100 my-2">
                             <input type="number" name="cardN2" placeholder="Users card number" class="border p-3 w-100 my-2">
-                            <input type="password" name="password" placeholder="Password" class="border p-3 w-100 my-2">
+                            <input type="number" name="amount" placeholder="Amount (tenge)" class="border p-3 w-100 my-2">
 
                             <button type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-3">Transfer</button>
 
@@ -33,6 +33,7 @@
         </div>
     </div>
 </section>
+<!--
 <section class="login p-8 border-top-1">
     <div >
         <div class="row justify-content-center">
@@ -82,6 +83,6 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 </body>
 </html>

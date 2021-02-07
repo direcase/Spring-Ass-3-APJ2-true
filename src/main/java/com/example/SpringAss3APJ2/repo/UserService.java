@@ -1,7 +1,6 @@
-package com.example.SpringAss3APJ2;
+package com.example.SpringAss3APJ2.repo;
 
 import com.example.SpringAss3APJ2.model.User;
-import com.example.SpringAss3APJ2.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
