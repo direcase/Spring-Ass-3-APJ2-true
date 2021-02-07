@@ -13,6 +13,7 @@ public class History implements Serializable {
     private int amount;
     private String time;
     private String type;
+    private int itogo;
 
 
     @Id
@@ -60,13 +61,27 @@ public class History implements Serializable {
         this.type = type;
     }
 
+
+
+    @Column(name = "itogo")
+    public int getItogo() {
+        return itogo;
+    }
+
+    public void setItogo(int itogo) {
+        this.itogo = itogo;
+    }
+
+
     @Override
     public String toString() {
         return "History{" +
                 "id=" + id +
                 ", card_id=" + card_id +
                 ", amount=" + amount +
-                ", time=" + time +
+                ", time='" + time + '\'' +
+                ", type='" + type + '\'' +
+                ", itogo=" + itogo +
                 '}';
     }
 }

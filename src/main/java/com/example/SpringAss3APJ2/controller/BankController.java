@@ -42,7 +42,7 @@ public class BankController {
         System.out.println(telNum+" "+tg+" "+card);
 
         if(bankService.findById(card)!=null) {
-           /* Card card1=bankService.findById(card);
+            Card card1=bankService.findById(card);
             card1.setAmount(card1.getAmount()-tg);
             card1.getAmount();
             System.out.println(card1);
@@ -54,8 +54,9 @@ public class BankController {
             java.util.Date date =new Date();
             history.setTime(date.toString());
             history.setType("-");
+            history.setItogo(card1.getAmount());
             bankService.saveHistory(history);
-            System.out.println(history);*/
+            System.out.println(history);
 
         }
         response.sendRedirect("/history/"+card);
@@ -70,13 +71,13 @@ public class BankController {
     @PostMapping("/transfers-boot/")
     public void maketrans(HttpServletResponse response, @RequestParam("cardN1") Long card1, @RequestParam("cardN2") Long card2, @RequestParam("amount") int tg) throws IOException {
         if(bankService.findById(card1)!=null&&bankService.findById(card2)!=null){
-            /*Card card=bankService.findById(card1);
+            Card card=bankService.findById(card1);
             card.setAmount(card.getAmount()-tg);
             System.out.println(card);
             bankService.saveAmount(card);
 
             Card cardN2=bankService.findById(card2);
-            cardN2.setAmount(cardN2.getAmount()+tg);
+            cardN2.setAmount(cardN2.getAmount()+(tg-(tg/100)));
             System.out.println(cardN2);
             bankService.saveAmount(cardN2);
 
@@ -86,6 +87,7 @@ public class BankController {
             java.util.Date date =new Date();
             history.setTime(date.toString());
             history.setType("-");
+            history.setItogo(card.getAmount());
             bankService.saveHistory(history);
 
             History history1=new History();
@@ -93,10 +95,11 @@ public class BankController {
             history1.setCard_id(card2);
             history1.setTime(date.toString());
             history1.setType("+");
+            history1.setItogo(cardN2.getAmount());
             bankService.saveHistory(history1);
 
             System.out.println(history);
-            System.out.println(history1);*/
+            System.out.println(history1);
 
         }
         response.sendRedirect("/history/"+card1);
