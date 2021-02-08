@@ -50,7 +50,7 @@ public class BankController {
 
             History history=new History();
             history.setAmount(tg);
-            history.setCard_id(card);
+            history.setCard_id(card.toString());
             java.util.Date date =new Date();
             history.setTime(date.toString());
             history.setType("-");
@@ -69,21 +69,39 @@ public class BankController {
     }
 
     @PostMapping("/transfers-boot/")
-    public void maketrans(HttpServletResponse response, @RequestParam("cardN1") Long card1, @RequestParam("cardN2") Long card2, @RequestParam("amount") int tg) throws IOException {
+    public void maketrans(HttpServletResponse response, @RequestParam("a") String radio, @RequestParam("cardN1") Long card1, @RequestParam("cardN2") Long card2, @RequestParam("amount") int tg) throws IOException {
         if(bankService.findById(card1)!=null&&bankService.findById(card2)!=null){
+            System.out.println(radio);
             Card card=bankService.findById(card1);
             card.setAmount(card.getAmount()-tg);
             System.out.println(card);
             bankService.saveAmount(card);
 
             Card cardN2=bankService.findById(card2);
-            cardN2.setAmount(cardN2.getAmount()+(tg-(tg/100)));
+            int a=0;
+
+            if(radio.equals("another bank")){
+                a=tg-(tg/100);
+
+            }else if(radio.equals("this bank")){
+                if(tg>100000){
+                    a=tg-(tg/100);
+
+                }else {
+                    a=tg;
+                }
+            }else if(radio.equals("between your accounts")){
+                a=tg;
+            }else System.out.println("huiniya");
+
+            System.out.println(a);
+            cardN2.setAmount(cardN2.getAmount()+a);
             System.out.println(cardN2);
             bankService.saveAmount(cardN2);
 
             History history=new History();
             history.setAmount(tg);
-            history.setCard_id(card1);
+            history.setCard_id(card1.toString());
             java.util.Date date =new Date();
             history.setTime(date.toString());
             history.setType("-");
@@ -91,8 +109,8 @@ public class BankController {
             bankService.saveHistory(history);
 
             History history1=new History();
-            history1.setAmount(tg);
-            history1.setCard_id(card2);
+            history1.setAmount(a);
+            history1.setCard_id(card2.toString());
             history1.setTime(date.toString());
             history1.setType("+");
             history1.setItogo(cardN2.getAmount());
@@ -106,12 +124,14 @@ public class BankController {
     }
 
     @GetMapping("history/{id}")
-    public String blogdetail(@PathVariable("id")Long id, Model model)
+    public String blogdetail(@PathVariable("id")String id, Model model)
     {
-        List<History> histories=bankService.showAll();
+        List<History> histories=bankService.showAll(id);
         model.addAttribute("historyList", histories);
         System.out.println(histories);
         return "history";
     }
+
+
 
 }

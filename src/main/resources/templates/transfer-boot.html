@@ -13,15 +13,19 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border">
-                    <h3 class="bg-gray p-4">Transfer money to card of another bank</h3>
-                    <p class="bg-gray p-4">cut 1% from the transfer amount</p>
+                    <h3 class="bg-gray p-4">Transfer money</h3>
+                    <p style="display: none" id="message" class="bg-gray p-4">cut 1% from the transfer amount</p>
+                    <p style="display: none" id="message2" class="bg-gray p-4">cut 1% if the transfer amount exceeds 100 000 KZT</p>
 
                     <form method="post" th:action="@{/transfers-boot/}">
                         <fieldset class="p-4">
+                            <input type="radio" id="radio" name="a" value="another bank">another bank
+                            <input type="radio" id="radio1" name="a" value="this bank">this bank
+                            <input type="radio" id="radio2" name="a" value="between your accounts">between your accounts
 
                             <input type="number" name="cardN1" placeholder="Your card number" class="border p-3 w-100 my-2">
                             <input type="number" name="cardN2" placeholder="Users card number" class="border p-3 w-100 my-2">
-                            <input type="number" name="amount" placeholder="Amount (tenge)" class="border p-3 w-100 my-2">
+                            <input type="number" name="amount" placeholder="Amount (tenge)" class="border p-3 w-100 my-2">tenge
 
                             <button type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-3">Transfer</button>
 
@@ -33,56 +37,22 @@
         </div>
     </div>
 </section>
-<!--
-<section class="login p-8 border-top-1">
-    <div >
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-8 align-item-center">
-                <div class="border">
-                    <h3 class="bg-gray p-4">Transfer  money to card of this bank</h3>
-                    <p class="bg-gray p-4">cut 1% if the transfer amount exceeds 100 000 KZT</p>
-
-                    <form action="/anotherBank" method="post">
-                        <fieldset class="p-4">
-
-                            <input type="number" name="cardN1" placeholder="Your card number" class="border p-3 w-100 my-2">
-                            <input type="number" name="cardN2" placeholder="Users card number" class="border p-3 w-100 my-2">
-                            <input type="password" name="password" placeholder="Password" class="border p-3 w-100 my-2">
-
-                            <button type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-3">Transfer</button>
-
-                        </fieldset>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-<section class="login p-8 border-top-1">
-    <div>
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-8 align-item-center">
-                <div class="border">
-                    <h3 class="bg-gray p-4">Transfer between your accounts</h3>
-                    <p class="bg-gray p-4"></p>
-
-                    <form action="/anotherBank" method="post">
-                        <fieldset class="p-4">
-
-                            <input type="number" name="cardN1" placeholder="From..." class="border p-3 w-100 my-2">
-                            <input type="number" name="cardN2" placeholder="To..." class="border p-3 w-100 my-2">
-                            <input type="password" name="password" placeholder="Password" class="border p-3 w-100 my-2">
-
-                            <button type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-3">Submit</button>
-
-                        </fieldset>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("input[type='radio']").change(function() {
+            if ($(this).val() == "another bank") {
+                $("#message").show();
+                $("#message2").hide();
+            } else if($(this).val() == "this bank"){
+                $("#message2").show();
+                $("#message").hide();
+            }else {
+                $("#message2").hide();
+                $("#message").hide();
+            }
+        });
+    });
+</script>
 </body>
 </html>

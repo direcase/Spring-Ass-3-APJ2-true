@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface HistoryRepo extends JpaRepository<History, Long> {
-    List<History> findByType(Long id);
+public interface HistoryRepo extends JpaRepository<History, String> {
+    //List<History> findAllByCard_id(String id);
+    // List<History> findHistoriesByCard_id(int id);
 
     //List<History> findAllByCard_id(Long id);
 }

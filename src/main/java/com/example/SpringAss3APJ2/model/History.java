@@ -6,10 +6,10 @@ import java.sql.Date;
 import java.sql.Time;
 
 @Entity(name = "historyEntity")
-@Table(name = "history")
+@Table(name = "history1")
 public class History implements Serializable {
     private Long id;
-    private Long card_id;
+    private String card_id;
     private int amount;
     private String time;
     private String type;
@@ -27,10 +27,10 @@ public class History implements Serializable {
     }
 
     @Column(name = "card_id")
-    public Long getCard_id() {
+    public String getCard_id() {
         return card_id;
     }
-    public void setCard_id(Long card_id) {
+    public void setCard_id(String card_id) {
         this.card_id = card_id;
     }
 

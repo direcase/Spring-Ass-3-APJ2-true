@@ -3,9 +3,8 @@ package com.example.SpringAss3APJ2.repo;
 import com.example.SpringAss3APJ2.model.Card;
 import com.example.SpringAss3APJ2.model.History;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import static org.springframework.data.jpa.domain.Specification.where;
+
 import java.util.List;
 
 @Service
@@ -32,7 +31,7 @@ public class BankService {
         return historyRepo.save(history);
     }
 
-    public List<History> showAll(){
+    public List<History> showAll(String id){
         return historyRepo.findAll();
     }
 }

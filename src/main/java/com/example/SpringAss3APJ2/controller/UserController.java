@@ -44,6 +44,12 @@ public class UserController
     {
         return "login";
     }
+
+    @PostMapping("/login/")
+    public String loginp(@RequestParam("email") String email,@RequestParam("password") String password){
+        //if()
+        return "index";
+    }
     @GetMapping("/registration")
     public String registration()
     {
