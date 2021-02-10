@@ -3,6 +3,7 @@ package com.example.SpringAss3APJ2.controller;
 
 import com.example.SpringAss3APJ2.model.Card;
 import com.example.SpringAss3APJ2.model.History;
+import com.example.SpringAss3APJ2.model.Sort;
 import com.example.SpringAss3APJ2.repo.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,7 @@ import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.sql.Time;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 
@@ -92,7 +92,7 @@ public class BankController {
                 }
             }else if(radio.equals("between your accounts")){
                 a=tg;
-            }else System.out.println("huiniya");
+            }else System.out.println("h");
 
             System.out.println(a);
             cardN2.setAmount(cardN2.getAmount()+a);
@@ -127,7 +127,13 @@ public class BankController {
     public String blogdetail(@PathVariable("id")String id, Model model)
     {
         List<History> histories=bankService.showAll(id);
-        model.addAttribute("historyList", histories);
+        Collections.sort(histories,new Sort());
+        List<History> hisList = new ArrayList<>();
+        for (int i=0; i<histories.size(); i++) {
+            System.out.println(histories.get(i));
+            hisList.add(histories.get(i));
+        }
+        model.addAttribute("historyList", hisList);
         System.out.println(histories);
         return "history";
     }
