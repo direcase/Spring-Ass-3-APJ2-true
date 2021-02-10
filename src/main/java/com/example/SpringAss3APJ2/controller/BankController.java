@@ -129,7 +129,7 @@ public class BankController {
         List<History> histories=bankService.showAll(id);
         Collections.sort(histories,new Sort());
         List<History> hisList = new ArrayList<>();
-        for (int i=0; i<histories.size(); i++) {
+        for (int i=histories.size()-1; i>=0; i--) {
             System.out.println(histories.get(i));
             hisList.add(histories.get(i));
         }
