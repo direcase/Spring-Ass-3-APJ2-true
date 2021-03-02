@@ -39,7 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/history/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/payments").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/transfers-boot").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/books/**").hasRole("ADMIN")
                 .antMatchers("/profile").hasAuthority("read")
                 .antMatchers("/arrivals").hasAuthority("edit")
             .and()
