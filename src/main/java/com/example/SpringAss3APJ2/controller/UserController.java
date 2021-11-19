@@ -46,8 +46,10 @@ public class UserController
     }
 
     @PostMapping("/login/")
-    public String loginp(@RequestParam("email") String email,@RequestParam("password") String password){
+    public String loginp(@RequestParam("email") String email,@RequestParam("password") String password, Model model){
         //if()
+        //model.addAttribute("user", userService.findByUserName("email"));
+        //System.out.println(userService.findByUserName("email"));
         return "index";
     }
     @GetMapping("/registration")

@@ -42,25 +42,30 @@ public class BankController {
         System.out.println(telNum+" "+tg+" "+card);
 
         if(bankService.findById(card)!=null) {
-            Card card1=bankService.findById(card);
-            card1.setAmount(card1.getAmount()-tg);
-            card1.getAmount();
-            System.out.println(card1);
-            bankService.saveAmount(card1);
-
-            History history=new History();
-            history.setAmount(tg);
-            history.setCard_id(card.toString());
-            java.util.Date date =new Date();
-            history.setTime(date.toString());
-            history.setType("-");
-            history.setItogo(card1.getAmount());
-            bankService.saveHistory(history);
-            System.out.println(history);
-
+            payMobile(tg, card.intValue());
         }
         response.sendRedirect("/history/"+card);
 
+    }
+
+    public int payMobile(int tg, int card){
+        Card card1=bankService.findById(Long.valueOf(card));
+        card1.setAmount(card1.getAmount()-tg);
+        card1.getAmount();
+        System.out.println(card1);
+        bankService.saveAmount(card1);
+
+        History history=new History();
+        history.setAmount(tg);
+        history.setCard_id(String.valueOf(card));
+        Date date =new Date();
+        history.setTime(date.toString());
+        history.setType("-");
+        history.setItogo(card1.getAmount());
+        bankService.saveHistory(history);
+        System.out.println(history);
+
+        return card1.getAmount()-tg;
     }
     @GetMapping("/transfers-boot")
     public String trans()
